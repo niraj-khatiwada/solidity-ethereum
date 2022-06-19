@@ -1,4 +1,3 @@
-// @ts-check
 import React from 'react'
 import { useWeb3React } from '@web3-react/core'
 
@@ -7,6 +6,9 @@ import {
   walletconnect,
   resetWalletConnector,
 } from '../helpers/connectors'
+import { getContract } from '../helpers/contract'
+import Balance from './Balance'
+import Network from './Network'
 
 const Web3ReactConnectionComponent = () => {
   const web3 = useWeb3React()
@@ -16,6 +18,7 @@ const Web3ReactConnectionComponent = () => {
   const disconnectWallet = () => {
     try {
       web3.deactivate()
+      localStorage.removeItem('connector')
       localStorage.removeItem('walletconnect')
       localStorage.removeItem('WALLETCONNECT_DEEPLINK_CHOICE')
     } catch (ex) {
@@ -77,7 +80,8 @@ const Web3ReactConnectionComponent = () => {
       {web3.account ? (
         <>
           <p>Account: {web3?.account}</p>
-          <p>Network: {web3?.chainId}</p>
+          <Balance />
+          <Network />
         </>
       ) : (
         <p>Not connected</p>
@@ -86,13 +90,6 @@ const Web3ReactConnectionComponent = () => {
         <p style={{ color: 'tomato' }}>{web3.error.message}</p>
       )}
       <div>
-        {/* <button
-          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-          onClick={writeToContractUsingWeb3React}
-        >
-          Write To Contract Via Web3React
-        </button> */}
-
         <button
           onClick={checkInfoSimple}
           style={{ display: 'block', margin: '10px 0' }}

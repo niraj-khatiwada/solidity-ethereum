@@ -53,8 +53,4 @@ contract FirstContract is Owner, Logger, IFirstContract {
         // require(amount <= 1e18, "Cannot withdraw more than 1eth.");
         payable(msg.sender).transfer(amount);
     }
-
-    // function pr() private override returns (uint256) {
-    //     return 2 + 2;
-    // }
 }
