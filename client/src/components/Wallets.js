@@ -6,9 +6,9 @@ import {
   walletconnect,
   resetWalletConnector,
 } from '../helpers/connectors'
-import { getContract } from '../helpers/contract'
 import Balance from './Balance'
 import Network from './Network'
+import SendFundToOwner from './SendFundToOwner'
 
 const Web3ReactConnectionComponent = () => {
   const web3 = useWeb3React()
@@ -82,6 +82,7 @@ const Web3ReactConnectionComponent = () => {
           <p>Account: {web3?.account}</p>
           <Balance />
           <Network />
+          <SendFundToOwner />
         </>
       ) : (
         <p>Not connected</p>
